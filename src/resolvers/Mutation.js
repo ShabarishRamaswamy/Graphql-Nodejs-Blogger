@@ -78,7 +78,7 @@ const Mutation = {
             ...args.data
         }
         db.posts.push(post)
-        pubsub.publish(`post ${args.data.id}`, {post})
+        pubsub.publish(`post`, {post})
         return post
     }, 
     deletePost(parent, args, { db }, info){
