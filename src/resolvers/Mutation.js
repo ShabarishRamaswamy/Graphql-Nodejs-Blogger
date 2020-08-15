@@ -189,7 +189,7 @@ const Mutation = {
         if(commentIndex === -1){
             throw new Error('Comment does not Exist')
         }
-        const comment = db.comments.splice(commentIndex, 1)
+        const [comment] = db.comments.splice(commentIndex, 1)
         pubsub.publish('comment', {
             comment: {
                 mutation: 'DELETED',
