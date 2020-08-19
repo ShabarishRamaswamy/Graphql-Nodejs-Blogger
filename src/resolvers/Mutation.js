@@ -176,7 +176,7 @@ const Mutation = {
             ...args.data
         }
         db.comments.push(comment)
-        pubsub.publish('comment', {
+        pubsub.publish(`comment ${args.data.post}`, {
             comment: {
                 mutation: 'CREATED',
                 data: comment
@@ -190,7 +190,7 @@ const Mutation = {
             throw new Error('Comment does not Exist')
         }
         const [comment] = db.comments.splice(commentIndex, 1)
-        pubsub.publish('comment', {
+        pubsub.publish(`comment ${comment.post}`, {
             comment: {
                 mutation: 'DELETED',
                 data: comment
@@ -205,7 +205,7 @@ const Mutation = {
         if(typeof args.data.text === 'string'){
             comment.text = args.data.text
         }
-        pubsub.publish('comment', {
+        pubsub.publish(`comment ${comment.post}`, {
             comment: {
                 mutation: 'UPDATED',
                 data: comment
